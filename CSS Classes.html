@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pseudo‑Classes Demo</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* dark navy */
+      --card:#0b1220;
+      --muted:#9fb2d6;
+      --accent:#60a5fa;
+      --accent-2:#f97316;
+      --success:#34d399;
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#071024);
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:1200px;
+    }
+
+    header{margin-bottom:18px;text-align:center}
+    header h1{margin:0;font-size:20px}
+    header p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    /* Flex row of example cards */
+    .examples{
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      justify-content:center;
+      flex-wrap:nowrap; /* keep in one row */
+      overflow:auto;
+      padding:6px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--card), rgba(11,18,32,0.75));
+      border-radius:12px;
+      padding:18px;
+      min-width:220px;
+      max-width:260px;
+      box-shadow: 0 8px 20px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .control{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    /* Link styles */
+    a.demo-link{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 10px;
+      border-radius:8px;
+      transition:all .16s ease;
+      background:transparent;
+      outline:none;
+    }
+    a.demo-link:hover{
+      background:var(--glass);
+      transform:translateY(-3px);
+      color:#dbeafe;
+    }
+    a.demo-link:focus{
+      box-shadow:0 0 0 4px rgba(96,165,250,0.15);
+      border-radius:8px;
+    }
+    a.demo-link:active{
+      transform:translateY(0);
+      background:rgba(96,165,250,0.12);
+    }
+
+    /* Button styles */
+    button.demo-btn{
+      background:transparent;
+      color:var(--accent-2);
+      border:2px solid rgba(249,115,22,0.12);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      transition:all .12s ease;
+      outline:none;
+    }
+    button.demo-btn:hover{
+      background:rgba(249,115,22,0.08);
+      transform:translateY(-3px);
+      color:#fff;
+    }
+    button.demo-btn:focus{
+      box-shadow:0 0 0 4px rgba(249,115,22,0.12);
+    }
+    button.demo-btn:active{
+      transform:translateY(1px) scale(.995);
+      background:rgba(249,115,22,0.16);
+    }
+
+    /* List styles - show nth-child differences */
+    ul.demo-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    ul.demo-list li{
+      padding:8px 10px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.02);
+      cursor:default;
+      outline:none;
+      transition:all .12s ease;
+    }
+    /* highlight alternate children */
+    ul.demo-list li:nth-child(odd){
+      background: linear-gradient(90deg, rgba(96,165,250,0.06), rgba(96,165,250,0.02));
+    }
+    ul.demo-list li:nth-child(even){
+      background: linear-gradient(90deg, rgba(34,197,94,0.04), rgba(34,197,94,0.02));
+    }
+
+    /* make li focusable so :focus works (tabindex="0"). */
+    ul.demo-list li:focus{
+      box-shadow:0 0 0 4px rgba(99,102,241,0.12);
+      transform:translateX(4px);
+      background:linear-gradient(90deg, rgba(99,102,241,0.12), rgba(99,102,241,0.06));
+    }
+    ul.demo-list li:hover{
+      transform:translateX(6px);
+      background:linear-gradient(90deg, rgba(96,165,250,0.12), rgba(96,165,250,0.04));
+    }
+    ul.demo-list li:active{
+      transform:translateX(2px) scale(.995);
+      background:rgba(255,255,255,0.03);
+    }
+
+    /* small explanation text */
+    .explain{color:var(--muted);font-size:13px;line-height:1.3}
+    .label{font-size:13px;color:#cfe6ff;font-weight:700}
+
+    /* responsive: allow horizontal scroll on small screens */
+    @media (max-width:900px){
+      .examples{flex-wrap:nowrap}
+      .card{min-width:200px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Pseudo‑Classes Demo — :hover, :focus, :active, :nth-child()</h1>
+      <p>Examples applied to links, buttons and list items. Use Tab / mouse to try focus, hover, and active states.</p>
+    </header>
+
+    <section class="examples" aria-label="Pseudo-class examples">
+
+      <!-- Link example -->
+      <article class="card">
+        <div class="label">:hover, :focus, :active on a link</div>
+        <div class="control">
+          <a class="demo-link" href="#" id="link1">Visit docs</a>
+        </div>
+        <p class="explain"><strong>:hover</strong> — changes background and lifts the link when the mouse is over it. <strong>:focus</strong> — a visible focus ring appears when tabbed to (keyboard navigation). <strong>:active</strong> — pressed state when you click.</p>
+      </article>
+
+      <!-- Button example -->
+      <article class="card">
+        <div class="label">:hover, :focus, :active on a button</div>
+        <div class="control">
+          <button class="demo-btn" id="btn1">Submit</button>
+        </div>
+        <p class="explain">Buttons show subtle lift on <strong>:hover</strong>, a focus ring on <strong>:focus</strong> (for keyboard users) and a pressed look on <strong>:active</strong> while the mouse is held down.</p>
+      </article>
+
+      <!-- List example with nth-child -->
+      <article class="card">
+        <div class="label">:nth-child() on list items</div>
+        <div class="control">
+          <ul class="demo-list" aria-label="sample list">
+            <li tabindex="0">Home</li>
+            <li tabindex="0">About</li>
+            <li tabindex="0">Services</li>
+            <li tabindex="0">Contact</li>
+            <li tabindex="0">Careers</li>
+          </ul>
+        </div>
+        <p class="explain"><strong>:nth-child()</strong> targets list items by position. Here odd and even items get different backgrounds — try tabbing into items to see <strong>:focus</strong> as well.</p>
+      </article>
+
+      <!-- Extra combined example showing multiple selectors -->
+      <article class="card">
+        <div class="label">Combined states</div>
+        <div class="control">
+          <a class="demo-link" href="#" id="link2">Open</a>
+          <button class="demo-btn" id="btn2">Go</button>
+        </div>
+        <p class="explain">You can combine these pseudo-classes in CSS to create rich interactive states (for hover, keyboard focus and active press) for better UX and accessibility.</p>
+      </article>
+
+    </section>
+
+    <footer style="margin-top:14px;color:var(--muted);text-align:center;font-size:13px;">
+      Tip: Press <kbd>Tab</kbd> to move focus to links or list items and then press <kbd>Enter</kbd> or <kbd>Space</kbd> to trigger <code>:active</code> via keyboard.
+    </footer>
+  </div>
+
+  <!-- optional small script to prevent link navigation while demonstrating -->
+  <script>
+    document.querySelectorAll('a.demo-link').forEach(a=>a.addEventListener('click', e=>e.preventDefault()));
+  </script>
+</body>
+</html>
