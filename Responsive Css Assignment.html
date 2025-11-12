@@ -6,7 +6,7 @@
   <title>Responsive Image Filter Gallery</title>
 
   <style>
-    /* ===== Reset & Base Styles ===== */
+    
     * {
       box-sizing: border-box;
       margin: 0;
@@ -31,7 +31,7 @@
       color: #2c2c2c;
     }
 
-    /* ===== Grid Layout ===== */
+  
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -54,7 +54,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 
-    /* ===== Image Styles ===== */
+    
     .gallery-item img {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -63,7 +63,7 @@
       display: block;
     }
 
-    /* Apply unique filters */
+    
     .gallery-item:nth-child(1) img { filter: blur(2px); }
     .gallery-item:nth-child(2) img { filter: grayscale(100%); }
     .gallery-item:nth-child(3) img { filter: sepia(80%); }
@@ -71,13 +71,13 @@
     .gallery-item:nth-child(5) img { filter: contrast(180%); }
     .gallery-item:nth-child(6) img { filter: hue-rotate(120deg); }
 
-    /* Hover removes filter & zooms image slightly */
+    
     .gallery-item:hover img {
       filter: none;
       transform: scale(1.05);
     }
 
-    /* ===== Caption Styles ===== */
+    
     .caption {
       position: absolute;
       bottom: 0;
@@ -99,7 +99,7 @@
       transform: translateY(0);
     }
 
-    /* ===== Responsive Adjustments ===== */
+    
     @media (max-width: 600px) {
       body {
         padding: 20px 10px;
@@ -152,3 +152,4 @@
 
 </body>
 </html>
+
